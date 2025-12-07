@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Birthday Under the Stars</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        margin: 0;
+        background: linear-gradient(130deg, #0b0f29, #1e1650, #3e1f68);
+        background-size: 400% 400%;
+        animation: bgMove 25s ease infinite;
+        color: #f6eaff;
+        font-family: 'Playfair Display', serif;
+        overflow-x: hidden;
+    }
+
+    @keyframes bgMove {
+        0% {background-position: 0% 50%;}
+        50% {background-position: 100% 50%;}
+        100% {background-position: 0% 50%;}
+    }
+
+    .container {
+        max-width: 900px;
+        margin: auto;
+        padding: 80px 20px;
+        text-align: center;
+        z-index: 2;
+        position: relative;
+    }
+
+    h1 {
+        font-family: 'Great Vibes', cursive;
+        font-size: 90px;
+        margin-bottom: 10px;
+        animation: fadeDown 2s ease forwards;
+        opacity: 0;
+    }
+
+    @keyframes fadeDown {
+        from {opacity: 0; transform: translateY(-40px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+
+    p.poem {
+        font-size: 22px;
+        line-height: 1.7;
+        opacity: 0;
+        animation: fadeInText 3s ease forwards;
+        animation-delay: 1.6s;
+    }
+
+    @keyframes fadeInText {
+        from {opacity: 0; transform: translateY(20px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+
+    /* surprise box */
+    .surprise-btn {
+        margin-top: 40px;
+        background: #f6e8ff;
+        color: #3b1b5e;
+        padding: 15px 35px;
+        border-radius: 30px;
+        font-size: 20px;
+        border: none;
+        cursor: pointer;
+        transition: 0.4s;
+        font-weight: bold;
+    }
+
+    .surprise-btn:hover {
+        background: #fff;
+        transform: scale(1.07);
+    }
+
+    .surprise-box {
+        margin-top: 40px;
+        padding: 30px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(7px);
+        font-size: 22px;
+        display: none;
+        animation: fadeInSurprise 1s ease forwards;
+    }
+
+    @keyframes fadeInSurprise {
+        from {opacity: 0; transform: translateY(30px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+
+    /* floating stars */
+    .star {
+        position: absolute;
+        color: #ffffff50;
+        font-size: 18px;
+        animation: floatStar 7s linear infinite;
+    }
+
+    @keyframes floatStar {
+        from {transform: translateY(0) rotate(0deg);}
+        to {transform: translateY(-230px) rotate(360deg);}
+    }
+</style>
+</head>
+
+<body>
+
+<!-- MUSIC — Insert your audio file (e.g., "back.mp3") -->
+<audio id="bgMusic" src="we-hug-now.mp3" preload="auto"></audio>
+
+<div class="container">
+    <h1>Happy Birthday</h1>
+
+    <p class="poem">
+        Malam ini, angin membawa cerita,<br>
+        dan setiap hela nafas bintang<br>
+        menyebut namamu perlahan.<br><br>
+
+        Di sebalik langit yang ungu,<br>
+        ada doa yang terbang,<br>
+        ada harapan yang kembali mekar,<br>
+        seindah detik kamu dilahirkan.<br><br>
+
+        Semoga setiap langkahmu selepas ini<br>
+        diberkati lembut oleh takdir,<br>
+        dan semoga seluruh semesta<br>
+        memeluk impianmu dengan hangat.<br><br>
+
+        Selamat ulang tahun—<br>
+        hari ini dunia menjadi lebih syahdu<br>
+        hanya kerana kamu ada.
+    </p>
+
+    <button class="surprise-btn" onclick="openSurprise()">Open Surprise 🎁</button>
+
+    <div class="surprise-box" id="surpriseBox">
+        🌙  
+        <br><br>
+        “Terima kasih kerana wujud.<br>
+        Terima kasih kerana menjadi cahaya<br>
+        pada hari-hari yang gelap.<br>
+        Dan hari ini — dunia meraikanmu.”  
+        <br><br>
+        💫 Selamat Hari Lahir 💫
+    </div>
+</div>
+
+<script>
+// floating stars
+for (let i = 0; i < 45; i++) {
+    let star = document.createElement("div");
+    star.className = "star";
+    star.innerHTML = "✦";
+    star.style.left = Math.random() * 100 + "vw";
+    star.style.top = 100 + Math.random() * 350 + "px";
+    star.style.fontSize = (12 + Math.random() * 18) + "px";
+    star.style.animationDuration = (5 + Math.random() * 6) + "s";
+    document.body.appendChild(star);
+}
+
+// surprise + music
+function openSurprise() {
+    const box = document.getElementById("surpriseBox");
+    const music = document.getElementById("bgMusic");
+
+    box.style.display = "block";
+    
+    // play music if user interacts (allowed by browsers)
+    music.play().catch(e => console.log("User gesture required:", e));
+}
+</script>
+
+</body>
+</html>
